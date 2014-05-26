@@ -28,6 +28,8 @@ task :coverage do
 end
 
 desc 'Run RuboCop over itself'
-Rubocop::RakeTask.new(:internal_investigation)
+Rubocop::RakeTask.new(:code_style) do |task|
+    task.fail_on_error = false
+end
 
-task default: [:spec, :internal_investigation]
+task default: [:spec, :code_style]

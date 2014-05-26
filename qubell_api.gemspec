@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Qubell API Wrapper'
   s.authors     = ['Nikolay Yurin']
   s.email       = 'yurinnick@outlook.com'
-  s.files       = %x{git ls-files}.split("\n")
+  s.files       = '%x(git ls-files)'.split("\n")
   s.homepage    =
     'http://rubygems.org/gems/hola'
   s.license       = 'apache2'

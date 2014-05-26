@@ -9,6 +9,8 @@ require 'rest_client'
 
 require 'errors/qubell_error'
 require 'errors/authentication_error'
+require 'errors/permissions_error'
+require 'errors/destroy_error'
 
 class QubellAPI
   attr_accessor :endpoint, :api_version

@@ -8,4 +8,6 @@ group :development do
   gem 'webmock'
   gem 'rubocop'
   gem 'yard'
+  gem 'simplecov'
+  gem 'simplecov-badge'
 end

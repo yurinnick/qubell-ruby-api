@@ -29,7 +29,7 @@ end
 
 desc 'Run RuboCop over itself'
 Rubocop::RakeTask.new(:code_style) do |task|
-    task.fail_on_error = false
+  task.fail_on_error = false
 end
 
 task default: [:spec, :code_style]

@@ -59,7 +59,7 @@ class QubellAPI
   end
 
   # Get the application instance status.
-  # @param [String] instance_id queried instance id
+  # @param [String] app_id queried instance id
   # @return [Hashes] instances status info
   def update_application_manifest(app_id, manifest_path)
     qubell_request("/applications/#{app_id}/manifest")
@@ -90,8 +90,8 @@ class QubellAPI
   end
 
   # Runs the specified application instance workflow.
-  # @param [String] queried instance_id
-  # @param [String] workflow name
+  # @param [String] instance_id queried instance_id
+  # @param [String] workflow instance workflow name
   # @return [Hashes] instance id
   def launch_workflow(instance_id, workflow)
     qubell_request("/instances/#{instance_id}/#{workflow}")

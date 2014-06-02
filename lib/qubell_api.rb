@@ -30,7 +30,7 @@ class QubellAPI
   end
 
   # Get list of all organizations that current user belong to.
-  # @return [Array<Hashes>] organizations info
+  # @return [Array<Hash{String => String}>] organizations info
   def organizations
     qubell_request('/organizations')
     .get do |response|
@@ -40,7 +40,7 @@ class QubellAPI
 
   # Get list of all applications in given organization.
   # @param [String] org_id queried organization id
-  # @return [Array<Hashes>] applications info
+  # @return [Array<Hash{String => String}>] applications info
   def get_applications(org_id)
     qubell_request("/organizations/#{org_id}/applications")
     .get do |response|
@@ -50,7 +50,7 @@ class QubellAPI
 
   # Get list of all named revisions for given application.
   # @param [String] app_id queried application id
-  # @return [Array<Hashes>] revisions info
+  # @return [Array<Hash{String => String}>] revisions info
   def get_revisions(app_id)
     qubell_request("/applications/#{app_id}/revisions")
     .get do |response|
@@ -60,7 +60,7 @@ class QubellAPI
 
   # Get the application instance status.
   # @param [String] app_id queried instance id
-  # @return [Hashes] instances status info
+  # @return [Hashes{String => String}] instances status info
   def update_application_manifest(app_id, manifest_path)
     qubell_request("/applications/#{app_id}/manifest")
     .put(File.read(manifest_path), content_type: 'application/x-yaml'
@@ -71,7 +71,7 @@ class QubellAPI
 
   # Get list of instances launched in given environment.
   # @param [String] env_id queried environment id
-  # @return [Array<Hashes>] instances info
+  # @return [Array<Hash{String => String}>] instances info
   def get_instances(env_id)
     qubell_request("/environments/#{env_id}/instances")
     .get do |response|
@@ -81,7 +81,7 @@ class QubellAPI
 
   # Get the application instance status.
   # @param [String] instance_id queried instance id
-  # @return [Hashes] instances status info
+  # @return [Hashes{String => String,Hash}] instances status info
   def get_instance_status(instance_id)
     qubell_request("/revisions/#{rev_id}/instances")
     .get do |response|
@@ -92,7 +92,7 @@ class QubellAPI
   # Runs the specified application instance workflow.
   # @param [String] instance_id queried instance_id
   # @param [String] workflow instance workflow name
-  # @return [Hashes] instance id
+  # @return [Hashes{String => String}] instance id
   def launch_workflow(instance_id, workflow)
     qubell_request("/instances/#{instance_id}/#{workflow}")
     .get do |response|

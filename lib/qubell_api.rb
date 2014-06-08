@@ -131,7 +131,7 @@ class QubellAPI
 
   # Create http request with basic auth
   # @param [String] path API resource path
-  # return [RestClient::Resource]
+  # @return [RestClient::Resource]
   def qubell_request(path)
     RestClient::Resource
     .new("#{@endpoint}/api/#{@api_version}#{path}", @username, @password)

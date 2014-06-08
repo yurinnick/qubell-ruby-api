@@ -13,11 +13,15 @@ require 'errors/authentication_error'
 require 'errors/permissions_error'
 require 'errors/destroy_error'
 
+# Implements wrapper for Qubell API
 class QubellAPI
-  attr_accessor :endpoint, :api_version
+  # Qubell API endpoint
+  attr_accessor :endpoint
+  # Qubell API version
+  attr_accessor :api_version
 
   # @param [Hash] params the parameters to configure an API calls with.
-  # @option params [String] :endpoint ('https://express.qubell.com') API endpoint
+  # @option params [String] :endpoint ('https://express.qubell.com')API endpoint
   # @option params [String] :api_version ('1') API version
   # @option params [String] :username
   # @option params [String] :password

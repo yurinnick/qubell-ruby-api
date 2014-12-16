@@ -1,0 +1,5 @@
+AllCops:
+    Exclude:
+        - test/**/*
+        - vendor/**/*
+        - tmp/**/*

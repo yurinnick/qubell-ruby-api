@@ -10,7 +10,9 @@ require 'json'
 module Qubell
   # Class wrapper for HTTP requests
   class Base
+    # @return [String] object id
     attr_reader :id
+    # @return [String] object name
     attr_reader :name
 
     def initialize(args)
@@ -19,11 +21,11 @@ module Qubell
     end
 
     def to_json(options)
-      { :id => @id, :name => @name }.to_json(options)
+      { id: @id, name: @name }.to_json(options)
     end
 
     def to_s
-      %({ "id": "#{@id}", "name": "#{@name}" })
+      %("id": "#{@id}", "name": "#{@name}")
     end
 
     def ==(other)

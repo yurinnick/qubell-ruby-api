@@ -14,6 +14,7 @@ require 'qubell/application'
 require 'qubell/organization'
 require 'qubell/configuration'
 require 'qubell/revision'
+require 'qubell/environment'
 
 # Main Qubell module
 module Qubell

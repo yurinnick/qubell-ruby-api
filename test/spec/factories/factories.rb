@@ -3,6 +3,7 @@ require 'qubell/application'
 require 'qubell/configuration'
 require 'qubell/organization'
 require 'qubell/revision'
+require 'qubell/environment'
 
 FactoryGirl.define do
   factory :client, class: Qubell::API
@@ -22,5 +23,11 @@ FactoryGirl.define do
 
   factory :revision, class: Qubell::Revision do
     initialize_with { new('id' => SecureRandom.hex(12), 'name' => 'rev') }
+  end
+
+  factory :environment, class: Qubell::Environment do
+    initialize_with do
+      new('id' => SecureRandom.hex(12), 'name' => 'env', 'isDefault' => true)
+    end
   end
 end

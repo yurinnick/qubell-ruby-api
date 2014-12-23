@@ -7,13 +7,12 @@ require 'qubell/application'
 require 'qubell/api_call'
 
 module Qubell
+  # Implements Qubell organization interface
   class Organization < Base
     def applications
-      apps = []
-      Qubell::APICall.get("/organizations/#{@id}/applications").each do |app|
-        apps << Application.new(app)
+      Qubell::APICall.get("/organizations/#{@id}/applications").map do |app|
+        Qubell::Application.new(app)
       end
-      apps
     end
   end
 end

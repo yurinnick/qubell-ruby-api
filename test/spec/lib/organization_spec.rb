@@ -19,7 +19,7 @@ module Qubell
 
     describe '#applications' do
       it 'return array of applications' do
-        expect(org.applications).to eq(apps)
+        expect(org.applications).to match_array(apps)
       end
     end
   end

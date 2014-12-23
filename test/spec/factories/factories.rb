@@ -13,14 +13,14 @@ FactoryGirl.define do
   end
 
   factory :organization, class: Qubell::Organization do
-    initialize_with { new('id' => '1', 'name' => 'testorg') }
+    initialize_with { new('id' => SecureRandom.hex(12), 'name' => 'org') }
   end
 
   factory :application, class: Qubell::Application do
-    initialize_with { new('id' => '1', 'name' => 'testapp') }
+    initialize_with { new('id' => SecureRandom.hex(12), 'name' => 'app') }
   end
 
   factory :revision, class: Qubell::Revision do
-    initialize_with { new('id' => '1', 'name' => 'testrev') }
+    initialize_with { new('id' => SecureRandom.hex(12), 'name' => 'rev') }
   end
 end

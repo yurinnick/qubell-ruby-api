@@ -34,7 +34,7 @@ module Qubell
             headers: { :'Content-type' => 'application/x-yaml' })
       end
       it 'return array of policies' do
-        expect(env.policies).to eq(policies['policies'])
+        expect(env.policies).to match_array(policies['policies'])
       end
     end
 
@@ -54,7 +54,7 @@ module Qubell
       end
       it 'return array of policies' do
         env.policies = policies['policies']
-        expect(env.policies).to eq(policies['policies'])
+        expect(env.policies).to match_array(policies['policies'])
       end
     end
 
@@ -67,7 +67,7 @@ module Qubell
             headers: { :'Content-type' => 'application/json' })
       end
       it 'return array of properties' do
-        expect(env.properties).to eq(properties['properties'])
+        expect(env.properties).to match_array(properties['properties'])
       end
     end
 
@@ -87,7 +87,7 @@ module Qubell
       end
       it 'can set value' do
         env.properties = properties['properties']
-        expect(env.properties).to eq(properties['properties'])
+        expect(env.properties).to match_array(properties['properties'])
       end
     end
 
@@ -100,7 +100,7 @@ module Qubell
             headers: { :'Content-type' => 'application/json' })
       end
       it 'return array of markers' do
-        expect(env.markers).to eq(markers['markers'].map { |m| m['name'] })
+        expect(env.markers).to match_array(markers['markers'].map { |m| m['name'] })
       end
     end
 
@@ -120,7 +120,7 @@ module Qubell
       end
       it 'can set value' do
         env.markers = markers['markers']
-        expect(env.markers).to eq(markers['markers'].map { |m| m['name'] })
+        expect(env.markers).to match_array(markers['markers'].map { |m| m['name'] })
       end
     end
   end

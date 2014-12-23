@@ -30,4 +30,4 @@ RuboCop::RakeTask.new(:code_style) do |task|
   task.fail_on_error = false
 end
 
-task default: [:spec]
+task default: [:spec, :code_style]

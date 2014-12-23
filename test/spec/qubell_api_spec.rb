@@ -1,4 +1,4 @@
-require 'rspec'
+require File.dirname(__FILE__) + '/spec_helper'
 
 module Qubell
   describe API do

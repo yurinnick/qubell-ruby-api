@@ -9,7 +9,7 @@ module Qubell
     before :each do
       stub_request(:get,
                    "#{config.endpoint}/api/#{config.api_version}/organizations")
-      .to_return(
+        .to_return(
           status: 200,
           body: orgs.to_json,
           headers: { :'Content-type' => 'application/json' })

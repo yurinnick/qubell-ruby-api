@@ -16,8 +16,12 @@ module Qubell
     attr_reader :name
 
     def initialize(args)
-      @id = args['id']
-      @name = args['name']
+      @id = if args[:id].nil?
+              fail QubellError "can't initialize #{self.class.name} without id"
+            else
+              args[:id]
+            end
+      @name = args[:name]
     end
 
     def to_json(options)

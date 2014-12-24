@@ -13,23 +13,23 @@ module Qubell
 
     def initialize(args)
       super
-      @is_default = args['isDefault']
+      @is_default = args[:isDefault]
     end
 
     def policies
-      Qubell::APICall.get("/environments/#{@id}")['policies']
+      Qubell::APICall.get("/environments/#{@id}")[:policies]
     end
 
     # noinspection RubyStringKeysInHashInspection
     def policies=(value)
       Qubell::APICall.put("/environments/#{@id}",
-                          { 'policies' => value }.to_yaml,
+                          { policies: value }.to_yaml,
                           content_type: 'application/x-yaml')
     end
 
     def markers
       Qubell::APICall
-        .get("/environments/#{@id}/markers")['markers'].map { |m| m['name'] }
+        .get("/environments/#{@id}/markers")[:markers].map { |m| m[:name] }
     end
 
     def markers=(value)
@@ -39,7 +39,7 @@ module Qubell
     end
 
     def properties
-      Qubell::APICall.get("/environments/#{@id}/properties")['properties']
+      Qubell::APICall.get("/environments/#{@id}/properties")[:properties]
     end
 
     def properties=(value)

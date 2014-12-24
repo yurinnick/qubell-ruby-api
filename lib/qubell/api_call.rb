@@ -34,12 +34,12 @@ module Qubell
     # @param [String] response
     def self.handle_error(response)
       case response.code
-      when 400 then fail DestroyError, 'instance is a submodule or active'
-      when 401 then fail AuthenticationError, 'invalid credentials'
-      when 403 then fail PermissionsError, 'insufficient privileges'
-      when 404 then fail ArgumentError, 'resource doesn’t exist'
-      when 409 then fail ArgumentError, 'another workflow is already running'
-      else fail QubellError, "unknown status code #{response.code}"
+      when 400 then fail Qubell::DestroyError
+      when 401 then fail Qubell::AuthenticationError
+      when 403 then fail Qubell::PermissionsDeniedError
+      when 404 then fail Qubell::ResourceUnavaliable
+      when 409 then fail Qubell::WorkflowError
+      else fail Qubell::BaseError, response.code
       end
     end
   end

@@ -1,13 +1,48 @@
 # Encoding: utf-8
 
-class QubellError < StandardError
-end
+module Qubell
+  # Base exception for Qubell module
+  class BaseError < StandardError
+    attr_reader :error_code
 
-class AuthenticationError < QubellError
-end
+    def initialize(error_code, msg = 'unknown status code')
+      super msg
+      @error_code = error_code
+    end
+  end
 
-class DestroyError < QubellError
-end
+  # Destroy exception for Qubell module
+  class DestroyError < Qubell::BaseError
+    def initialize(msg = 'instance is a submodule or active')
+      super '400', msg
+    end
+  end
 
-class PermissionsError < QubellError
+  # Authentication exception for Qubell module
+  class AuthenticationError < Qubell::BaseError
+    def initialize(msg = 'invalid credentials')
+      super '401', msg
+    end
+  end
+
+  # Invalid permissions exception for Qubell module
+  class PermissionsDeniedError < Qubell::BaseError
+    def initialize(msg = 'insufficient privileges')
+      super '403', msg
+    end
+  end
+
+  # Unavaliable resource exception for Qubell module
+  class ResourceUnavaliable < Qubell::BaseError
+    def initialize(msg = 'resource doesn’t exist')
+      super '404', msg
+    end
+  end
+
+  # Workflow exception for Qubell module
+  class WorkflowError < Qubell::BaseError
+    def initialize(msg = 'another workflow is already running')
+      super '409', msg
+    end
+  end
 end

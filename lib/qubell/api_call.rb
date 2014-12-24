@@ -22,7 +22,7 @@ module Qubell
     def self.handle_response(data)
       if data.code == 200
         case data.headers[:content_type]
-        when 'application/json' then JSON.load data
+        when 'application/json' then JSON.parse(data, symbolize_names: true)
         when 'application/x-yaml' then YAML.load data
         else data.empty? ? nil : data
         end

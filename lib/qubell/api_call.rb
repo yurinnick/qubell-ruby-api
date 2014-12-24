@@ -18,6 +18,8 @@ module Qubell
       end
     end
 
+    private
+
     # @param [String] resp
     def self.handle_response(data)
       if data.code == 200

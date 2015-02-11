@@ -5,10 +5,8 @@ module Qubell
   describe Environment do
     let(:config) { FactoryGirl.build :configuration }
     let(:env) { FactoryGirl.build :environment }
-    let(:env_url)  do
-      "#{config.endpoint}/api/#{config.api_version}/" \
-        "environments/#{env.id}"
-    end
+    let(:env_url) { "#{config.endpoint}/environments/#{env.id}" }
+    let(:instances) { FactoryGirl.build_list(:instance, 1) }
     # noinspection RubyStringKeysInHashInspection
     let(:policies) do
       { policies: { testkey: 'test-value' } }

@@ -7,19 +7,30 @@ module Qubell
     let(:org) { FactoryGirl.build :organization }
     let(:apps) { FactoryGirl.build_list(:application, 1) }
 
-    before :each do
-      stub_request(:get,
-                   "#{config.endpoint}/api/#{config.api_version}/" \
-                       "organizations/#{org.id}/applications")
+    describe '#applications' do
+      before do
+        stub_request(:get,
+                     "#{config.endpoint}/organizations/#{org.id}/applications")
         .to_return(
             status: 200,
             body: apps.to_json,
             headers: { :'Content-type' => 'application/json' })
-    end
-
-    describe '#applications' do
+      end
       it 'return array of applications' do
         expect(org.applications).to match_array(apps)
+      end
+    end
+
+    describe '#new' do
+      before do
+        stub_request(:get, "#{config.endpoint}/organizations")
+        .to_return(
+            status: 200,
+            body: [org].to_json,
+            headers: { :'Content-type' => 'application/json' })
+      end
+      it 'return organization' do
+        expect(org).to eq(Qubell::Organization.new(org.to_hash))
       end
     end
   end

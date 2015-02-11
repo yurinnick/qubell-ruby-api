@@ -123,5 +123,18 @@ module Qubell
         expect(env.markers).to match_array(markers[:markers].map { |m| m[:name] })
       end
     end
+
+    describe '#instances' do
+      before do
+        stub_request(:get, "#{env_url}/instances")
+        .to_return(
+            status: 200,
+            body: instances.to_json,
+            headers: { :'Content-type' => 'application/json' })
+      end
+      it 'return array of application instances' do
+        expect(env.instances).to match_array(instances)
+      end
+    end
   end
 end

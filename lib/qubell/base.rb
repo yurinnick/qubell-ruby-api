@@ -17,8 +17,8 @@ module Qubell
 
     def initialize(args)
       @id = if args[:id].nil?
-              fail ArgumentError.new(
-                       "can't initialize #{self.class.name} without id")
+              fail ArgumentError,
+                   "can't initialize #{self.class.name} without id"
             else
               args[:id]
             end
@@ -26,7 +26,7 @@ module Qubell
     end
 
     def to_json(options)
-      self.to_hash.to_json(options)
+      to_hash.to_json(options)
     end
 
     def to_s

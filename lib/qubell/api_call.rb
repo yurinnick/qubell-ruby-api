@@ -2,7 +2,7 @@ require 'yaml'
 require 'qubell/errors'
 
 module Qubell
-  # Implements Qubell API http call helpers
+  # Implements Qubell API HTTP call helpers
   class APICall
     %w(get post put delete).each do |http_method|
       define_singleton_method(http_method.to_sym) do |path, *args|
@@ -18,9 +18,7 @@ module Qubell
       end
     end
 
-    private
-
-    # @param [String] resp
+    # @param [String] data
     def self.handle_response(data)
       if data.code == 200
         case data.headers[:content_type]

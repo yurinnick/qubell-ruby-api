@@ -5,6 +5,7 @@
 require 'yaml'
 require 'qubell/base'
 require 'qubell/api_call'
+require 'qubell/instance'
 
 module Qubell
   # Implements Qubell environment interface
@@ -46,6 +47,12 @@ module Qubell
       Qubell::APICall.put("/environments/#{@id}/properties",
                           { properties: value }.to_json,
                           content_type: 'application/json')
+    end
+
+    def instances
+      Qubell::APICall.get("/environments/#{@id}/instances").map do |inst|
+        Qubell::Instance.new(inst)
+      end
     end
   end
 end

@@ -7,8 +7,7 @@ module Qubell
     let(:orgs) { FactoryGirl.build_list(:organization, 1) }
 
     before :each do
-      stub_request(:get,
-                   "#{config.endpoint}/api/#{config.api_version}/organizations")
+      stub_request(:get, "#{config.endpoint}/organizations")
         .to_return(
           status: 200,
           body: orgs.to_json,

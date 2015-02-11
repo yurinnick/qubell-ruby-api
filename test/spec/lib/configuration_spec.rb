@@ -3,14 +3,14 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 module Qubell
   describe Configuration do
-    describe '#endpoint' do
+    describe '#domain' do
       it 'default value is https://express.qubell.com' do
-        expect(Qubell::Configuration.new.endpoint).to eq('https://express.qubell.com')
+        expect(Qubell::Configuration.new.domain).to eq('https://express.qubell.com')
       end
       it 'can set value' do
         config = Qubell::Configuration.new
-        config.endpoint = 'test'
-        expect(config.endpoint).to eq('test')
+        config.domain = 'test'
+        expect(config.domain).to eq('test')
       end
     end
     describe '#api_version' do
@@ -48,7 +48,7 @@ module Qubell
         config = Qubell::Configuration.new
         config.username = 'username'
         config.password = 'password'
-        expect(config.to_s).to eq('{"endpoint": "https://express.qubell.com",' \
+        expect(config.to_s).to eq('{"domain": "https://express.qubell.com",' \
                                       '"api_version": "1",' \
                                       '"username": "username",' \
                                       '"password": "password"}')

@@ -2,7 +2,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 shared_examples 'a qubell api call' do |method|
-  let(:url) { "#{config.endpoint}/api/#{config.api_version}/test" }
+  let(:url) { "#{config.endpoint}/test" }
   let(:response) { { key1: { key2: %w(value1 value2) } } }
   let(:config) { FactoryGirl.build :configuration }
   let(:class_method) { Qubell::APICall.method(method) }

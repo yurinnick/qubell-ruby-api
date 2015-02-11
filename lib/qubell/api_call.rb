@@ -8,7 +8,7 @@ module Qubell
       define_singleton_method(http_method.to_sym) do |path, *args|
         Qubell.configure do |config|
           RestClient::Resource.new(
-              "#{config.endpoint}/api/#{config.api_version}#{path}",
+              "#{config.endpoint}#{path}",
               config.username,
               config.password)
             .send(http_method.to_sym, *args) do |response|

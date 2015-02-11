@@ -31,11 +31,9 @@ module Qubell
     # Get list of all organizations that current user belong to.
     # @return [Array<Qubell::Organization>] organizations info
     def organizations
-      orgs = []
-      Qubell::APICall.get('/organizations').each do |org|
-        orgs << Qubell::Organization.new(org)
+      Qubell::APICall.get('/organizations').map do |org|
+        Qubell::Organization.new(org)
       end
-      orgs
     end
 
     # Get list of instances launched in given environment.

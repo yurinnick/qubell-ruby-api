@@ -26,11 +26,15 @@ module Qubell
     end
 
     def to_json(options)
-      { id: @id, name: @name }.to_json(options)
+      self.to_hash.to_json(options)
     end
 
     def to_s
       %("id": "#{@id}", "name": "#{@name}")
+    end
+
+    def to_hash
+      { id: @id, name: @name }
     end
 
     def ==(other)

@@ -45,7 +45,7 @@ module Qubell
 
     %w(version parameters status).each do |method_name|
       define_method(method_name.to_sym) do
-        self.global_info[method_name]
+        global_info[method_name]
       end
     end
 

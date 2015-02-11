@@ -34,10 +34,10 @@ module Qubell
       # organization, get all instances in this environment and finally
       # filter them by application.
       # Like in one russian fairytail: "his death is at the end of the needle,
-      # that needle is in the egg, then egg is in a duck, that duck is in a hare,
-      # the hare is in the trunk, and the trunk stands on a high oak"
-      Qubell::Organization.new(:id => @organization).environments
-      .map { |env| env.instances }.flatten.select do |instance|
+      # that needle is in the egg, then egg is in a duck, that duck is in a
+      # hare, the hare is in the trunk, and the trunk stands on a high oak"
+      Qubell::Organization.new(id: @organization).environments
+        .map(&:instances).flatten.select do |instance|
         instance.instance_of_app?(self)
       end
     end
@@ -58,7 +58,7 @@ module Qubell
       id = Qubell::APICall.put("/applications/#{@id}/launch",
                                args.to_json,
                                content_type: 'application/json')['id']
-      self.instances.select { |i| i.id == id }
+      instances.select { |i| i.id == id }
     end
 
     private

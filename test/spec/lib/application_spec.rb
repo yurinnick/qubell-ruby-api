@@ -82,5 +82,25 @@ module Qubell
         expect(app.instances).to match_array([instance])
       end
     end
+
+    describe '#launch' do
+      let(:new_instance) { FactoryGirl.build :instance }
+      let(:parameters) { {} }
+      before do
+        allow(app).to receive(:instances) { [new_instance] }
+
+        stub_request(:put, "#{app_url}/launch")
+        .with(
+            body: parameters.to_json,
+            headers: { :'Content-type' => 'application/json' })
+        .to_return(
+            status: 200,
+            body: { id: new_instance.id }.to_json,
+            headers: { :'Content-type' => 'application/json' })
+      end
+      it 'return new instance id' do
+        expect(app.launch(parameters)).to eq(new_instance)
+      end
+    end
   end
 end

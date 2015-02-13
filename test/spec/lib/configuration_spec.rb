@@ -43,6 +43,21 @@ module Qubell
         expect(config.password).to eq('password')
       end
     end
+    describe '#endpoint' do
+      it 'default return value is https://express.qubell.com/api/1' do
+        expect(Qubell::Configuration.new.endpoint).to eq('https://express.qubell.com/api/1')
+      end
+      it 'dependens on @domain' do
+        config = Qubell::Configuration.new
+        config.domain = 'test'
+        expect(config.endpoint).to eq('test/api/1')
+      end
+      it 'dependens on @api_version' do
+        config = Qubell::Configuration.new
+        config.api_version = '2'
+        expect(config.endpoint).to eq('https://express.qubell.com/api/2')
+      end
+    end
     describe '#to_s' do
       it 'return json string' do
         config = Qubell::Configuration.new

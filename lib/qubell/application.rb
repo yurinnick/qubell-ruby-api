@@ -12,6 +12,9 @@ require 'qubell/organization'
 module Qubell
   # Qubell application class
   class Application < Base
+
+    attr_reader :organization
+
     def initialize(args)
       super
       @organization = args[:organization]
@@ -57,12 +60,8 @@ module Qubell
     def launch(args)
       id = Qubell::APICall.put("/applications/#{@id}/launch",
                                args.to_json,
-                               content_type: 'application/json')['id']
-      instances.select { |i| i.id == id }
+                               content_type: 'application/json')[:id]
+      instances.select { |instance| instance.id == id }.first
     end
-
-    private
-
-    attr_reader :organization
   end
 end

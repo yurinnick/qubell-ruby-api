@@ -19,27 +19,27 @@ module Qubell
     end
 
     # @param [String] data
-    def self.handle_response(data)
-      if data.code == 200
-        case data.headers[:content_type]
-        when 'application/json' then JSON.parse(data, symbolize_names: true)
-        when 'application/x-yaml' then YAML.load data
-        else data.empty? ? nil : data
+    def self.handle_response(response)
+      if response.code == 200
+        case response.headers[:content_type]
+        when 'application/json' then JSON.parse(response, symbolize_names: true)
+        when 'application/x-yaml' then YAML.load response
+        else response.empty? ? nil : response
         end
       else
-        handle_error(data)
+        handle_error(response.code)
       end
     end
 
     # @param [String] response
-    def self.handle_error(response)
-      case response.code
+    def self.handle_error(code)
+      case code
       when 400 then fail Qubell::ExecutionError
       when 401 then fail Qubell::AuthenticationError
       when 403 then fail Qubell::PermissionsDeniedError
       when 404 then fail Qubell::ResourceUnavaliable
       when 409 then fail Qubell::WorkflowError
-      else fail Qubell::BaseError, response.code
+      else fail Qubell::BaseError, code
       end
     end
   end

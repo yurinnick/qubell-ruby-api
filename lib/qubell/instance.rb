@@ -25,10 +25,10 @@ module Qubell
     end
 
     # Associates user data with the instance.
-    # @param [String] userdata JSON-encoded user data
+    # @param [String] data JSON-encoded user data
     # @return [#void]
-    def upload_user_data(userdata)
-      Qubell::APICall.put("/instances/#{@id}/userData", userdata)
+    def userdata(data)
+      Qubell::APICall.put("/instances/#{@id}/userData", data)
     end
 
     # Destroy an application

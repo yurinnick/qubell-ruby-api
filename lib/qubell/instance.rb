@@ -28,7 +28,11 @@ module Qubell
     # @param [String] data JSON-encoded user data
     # @return [#void]
     def userdata(data)
-      Qubell::APICall.put("/instances/#{@id}/userData", data)
+      begin
+        Qubell::APICall.put("/instances/#{@id}/userData", data)
+      rescue Qubell::ExecutionError
+        fail Qubell::FormatError
+      end
     end
 
     # Destroy an application
@@ -36,7 +40,11 @@ module Qubell
     # @return [#void]
     def destroy(force = false)
       status = force ? '1' : '0'
-      Qubell::APICall.delete("/instances/#{@id}?#{status}")
+      begin
+        Qubell::APICall.delete("/instances/#{@id}?#{status}")
+      rescue Qubell::ExecutionError
+        fail Qubell::DestroyError
+      end
     end
 
     def instance_of_app?(app)

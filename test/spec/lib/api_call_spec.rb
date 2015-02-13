@@ -38,7 +38,7 @@ shared_examples 'a qubell api call' do |method|
     end
     it 'raise Qubell::DestroyError ' do
       expect { class_method.call('/test', data) }
-      .to raise_error Qubell::DestroyError
+      .to raise_error Qubell::ExecutionError
     end
   end
 

@@ -49,19 +49,27 @@ module Qubell
     # @param [String] content new manifest content
     # @return [String] instances status info
     def update(content)
-      Qubell::APICall.put("/applications/#{@id}/manifest",
-                          content,
-                          content_type: 'application/x-yaml')[:version]
+      begin
+        Qubell::APICall.put("/applications/#{@id}/manifest",
+                            content,
+                            content_type: 'application/x-yaml')[:version]
+      rescue Qubell::ExecutionError
+        fail Qubell::FormatError, 'currect manifest is incorrect'
+      end
     end
 
     # Launch new instance of given application.
     # @param [Hash<String => String>] args map of configuration parameters
     # @return [Qubell::Instance] revisions info
     def launch(args)
-      id = Qubell::APICall.put("/applications/#{@id}/launch",
-                               args.to_json,
-                               content_type: 'application/json')[:id]
-      instances.select { |instance| instance.id == id }.first
+      begin
+        id = Qubell::APICall.put("/applications/#{@id}/launch",
+                                 args.to_json,
+                                 content_type: 'application/json')[:id]
+        instances.select { |instance| instance.id == id }.first
+      rescue Qubell::ExecutionError
+        fail Qubell::FormatError, 'currect manifest is incorrect'
+      end
     end
   end
 end

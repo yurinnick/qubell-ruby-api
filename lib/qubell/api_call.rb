@@ -34,7 +34,7 @@ module Qubell
     # @param [String] response
     def self.handle_error(response)
       case response.code
-      when 400 then fail Qubell::DestroyError
+      when 400 then fail Qubell::ExecutionError
       when 401 then fail Qubell::AuthenticationError
       when 403 then fail Qubell::PermissionsDeniedError
       when 404 then fail Qubell::ResourceUnavaliable

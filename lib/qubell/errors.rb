@@ -11,8 +11,8 @@ module Qubell
     end
   end
 
-  # Destroy exception for Qubell module
-  class DestroyError < Qubell::BaseError
+  # Common Qubell API exception
+  class ExecutionError < Qubell::BaseError
     def initialize(msg = 'instance is a submodule or active')
       super '400', msg
     end
@@ -43,6 +43,18 @@ module Qubell
   class WorkflowError < Qubell::BaseError
     def initialize(msg = 'another workflow is already running')
       super '409', msg
+    end
+  end
+
+  class FormatError < ExecutionError
+    def initialize (msg = 'incorrect format or data')
+      super
+    end
+  end
+
+  class DestroyError < ExecutionError
+    def initialize (msg = 'specified instance is either a submodule or active')
+      super
     end
   end
 end

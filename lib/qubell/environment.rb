@@ -23,9 +23,13 @@ module Qubell
 
     # noinspection RubyStringKeysInHashInspection
     def policies=(value)
-      Qubell::APICall.put("/environments/#{@id}",
-                          { policies: value }.to_yaml,
-                          content_type: 'application/x-yaml')
+      begin
+        Qubell::APICall.put("/environments/#{@id}",
+                            { policies: value }.to_yaml,
+                            content_type: 'application/x-yaml')
+      rescue Qubell::ExecutionError
+        fail Qubell::FormatError
+      end
     end
 
     def markers
@@ -34,9 +38,13 @@ module Qubell
     end
 
     def markers=(value)
-      Qubell::APICall.put("/environments/#{@id}/markers",
-                          { markers: value.each { |v| { name: v } } }.to_json,
-                          content_type: 'application/json')
+      begin
+        Qubell::APICall.put("/environments/#{@id}/markers",
+                            { markers: value.each { |v| { name: v } } }.to_json,
+                            content_type: 'application/json')
+      rescue Qubell::ExecutionError
+        fail Qubell::FormatError
+      end
     end
 
     def properties
@@ -44,9 +52,13 @@ module Qubell
     end
 
     def properties=(value)
-      Qubell::APICall.put("/environments/#{@id}/properties",
-                          { properties: value }.to_json,
-                          content_type: 'application/json')
+      begin
+        Qubell::APICall.put("/environments/#{@id}/properties",
+                            { properties: value }.to_json,
+                            content_type: 'application/json')
+      rescue Qubell::ExecutionError
+        fail Qubell::FormatError
+      end
     end
 
     def instances

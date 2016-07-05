@@ -1,4 +1,4 @@
 # Main Qubell module
 module Qubell
-  VERSION = '0.0.1'
+  VERSION = '0.0.1'.freeze
 end

@@ -46,14 +46,16 @@ module Qubell
     end
   end
 
+  # Invalid input exception for Qubell module
   class FormatError < ExecutionError
-    def initialize (msg = 'incorrect format or data')
+    def initialize(msg = 'incorrect format or data')
       super
     end
   end
 
+  # Instance destoy exception for Qubell module
   class DestroyError < ExecutionError
-    def initialize (msg = 'specified instance is either a submodule or active')
+    def initialize(msg = 'specified instance is either a submodule or active')
       super
     end
   end

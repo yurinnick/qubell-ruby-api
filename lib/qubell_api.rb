@@ -26,6 +26,7 @@ module Qubell
         Qubell.configuration.send("#{key[0]}=", key[1])
       end
     end
+
     # Get list of all organizations that current user belong to.
     # @return [Array<Qubell::Organization>] organizations info
     def organizations

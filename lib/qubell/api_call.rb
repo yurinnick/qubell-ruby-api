@@ -10,8 +10,8 @@ module Qubell
           RestClient::Resource.new(
             "#{config.endpoint}#{path}",
             config.username,
-            config.password)
-            .send(http_method.to_sym, *args) do |response|
+            config.password
+          ).send(http_method.to_sym, *args) do |response|
             handle_response(response)
           end
         end
@@ -34,12 +34,12 @@ module Qubell
     # @param [String] response
     def self.handle_error(code)
       case code
-      when 400 then fail Qubell::ExecutionError
-      when 401 then fail Qubell::AuthenticationError
-      when 403 then fail Qubell::PermissionsDeniedError
-      when 404 then fail Qubell::ResourceUnavaliable
-      when 409 then fail Qubell::WorkflowError
-      else fail Qubell::BaseError, code
+      when 400 then raise Qubell::ExecutionError
+      when 401 then raise Qubell::AuthenticationError
+      when 403 then raise Qubell::PermissionsDeniedError
+      when 404 then raise Qubell::ResourceUnavaliable
+      when 409 then raise Qubell::WorkflowError
+      else raise Qubell::BaseError, code
       end
     end
   end

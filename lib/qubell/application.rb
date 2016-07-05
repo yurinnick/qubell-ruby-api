@@ -12,13 +12,13 @@ require 'qubell/organization'
 module Qubell
   # Qubell application class
   class Application < Base
-
     attr_reader :organization
 
     def initialize(args)
       super
       @organization = args[:organization]
     end
+
     # Get list of all revisions for given application.
     # @return [Array<Qubell::Revision>] revisions info
     def revisions
@@ -40,7 +40,7 @@ module Qubell
       # that needle is in the egg, then egg is in a duck, that duck is in a
       # hare, the hare is in the trunk, and the trunk stands on a high oak"
       Qubell::Organization.new(id: @organization).environments
-        .map(&:instances).flatten.select do |instance|
+                          .map(&:instances).flatten.select do |instance|
         instance.instance_of_app?(self)
       end
     end
@@ -49,27 +49,23 @@ module Qubell
     # @param [String] content new manifest content
     # @return [String] instances status info
     def update(content)
-      begin
-        Qubell::APICall.put("/applications/#{@id}/manifest",
-                            content,
-                            content_type: 'application/x-yaml')[:version]
-      rescue Qubell::ExecutionError
-        fail Qubell::FormatError, 'currect manifest is incorrect'
-      end
+      Qubell::APICall.put("/applications/#{@id}/manifest",
+                          content,
+                          content_type: 'application/x-yaml')[:version]
+    rescue Qubell::ExecutionError
+      raise Qubell::FormatError, 'currect manifest is incorrect'
     end
 
     # Launch new instance of given application.
     # @param [Hash<String => String>] args map of configuration parameters
     # @return [Qubell::Instance] revisions info
     def launch(args)
-      begin
-        id = Qubell::APICall.put("/applications/#{@id}/launch",
-                                 args.to_json,
-                                 content_type: 'application/json')[:id]
-        instances.select { |instance| instance.id == id }.first
-      rescue Qubell::ExecutionError
-        fail Qubell::FormatError, 'currect manifest is incorrect'
-      end
+      id = Qubell::APICall.put("/applications/#{@id}/launch",
+                               args.to_json,
+                               content_type: 'application/json')[:id]
+      instances.select { |instance| instance.id == id }.first
+    rescue Qubell::ExecutionError
+      raise Qubell::FormatError, 'currect manifest is incorrect'
     end
   end
 end

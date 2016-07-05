@@ -17,8 +17,8 @@ module Qubell
 
     def initialize(args)
       @id = if args[:id].nil?
-              fail ArgumentError,
-                   "can't initialize #{self.class.name} without id"
+              raise ArgumentError,
+                    "can't initialize #{self.class.name} without id"
             else
               args[:id]
             end

@@ -11,7 +11,8 @@ module Qubell
         .to_return(
           status: 200,
           body: orgs.to_json,
-          headers: { :'Content-type' => 'application/json' })
+          headers: { :'Content-type' => 'application/json' }
+        )
     end
 
     describe '#organizations' do

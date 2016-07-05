@@ -6,6 +6,7 @@ group :development do
   gem 'rake',         '~> 11.2.0'
   gem 'webmock',      '~> 2.1.0'
   gem 'rspec',        '~> 3.5.0'
+  gem 'rubocop-rspec', '~> 1.5.0'
   gem 'rubocop',      '~> 0.41.0'
   gem 'yard',         '~> 0.9.0'
   gem 'factory_girl', '~> 4.7.0'

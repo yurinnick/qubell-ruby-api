@@ -16,12 +16,12 @@ module Qubell
     attr_reader :name
 
     def initialize(args)
-      @id = if args[:id].nil?
-              raise ArgumentError,
-                    "can't initialize #{self.class.name} without id"
-            else
-              args[:id]
-            end
+      if args[:id].nil?
+        raise ArgumentError,
+              "can't initialize #{self.class.name} without id"
+      end
+
+      @id = args[:id]
       @name = args[:name]
     end
 
@@ -38,7 +38,9 @@ module Qubell
     end
 
     def ==(other)
-      other.instance_of?(self.class) && id == other.id && name == other.name
+      other.instance_of?(self.class) &&
+        id == other.id &&
+        name == other.name
     end
   end
 end

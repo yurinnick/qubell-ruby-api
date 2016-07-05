@@ -1,7 +1,7 @@
 require 'rspec'
 
 module Qubell
-  describe Revision do
+  describe Resources::Revision do
     let(:config) { FactoryGirl.build :configuration }
     let(:revision) { FactoryGirl.build :revision }
     let(:revision_url) { "#{config.endpoint}/revisions/#{revision.id}" }
@@ -10,10 +10,11 @@ module Qubell
     describe '#instances' do
       before do
         stub_request(:get, "#{revision_url}/instances")
-        .to_return(
+          .to_return(
             status: 200,
             body: instances.to_json,
-            headers: { :'Content-type' => 'application/json' })
+            headers: { :'Content-type' => 'application/json' }
+          )
       end
       it 'return array of application instances' do
         expect(revision.instances).to match_array(instances)

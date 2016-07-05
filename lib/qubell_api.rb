@@ -10,17 +10,20 @@ require 'rest_client'
 
 require 'qubell/base'
 require 'qubell/errors'
-require 'qubell/application'
-require 'qubell/organization'
 require 'qubell/configuration'
-require 'qubell/revision'
-require 'qubell/environment'
+require 'qubell/api_call'
+
+require 'qubell/resources/instance'
+require 'qubell/resources/revision'
+require 'qubell/resources/application'
+require 'qubell/resources/environment'
+require 'qubell/resources/organization'
 
 # Main Qubell module
 module Qubell
   # Implements wrapper for Qubell API
   class API < Base
-    # @param [HashMap<String => String>] key
+    # @param [HashMap<String => String>] options
     def initialize(options = {})
       options.each do |key|
         Qubell.configuration.send("#{key[0]}=", key[1])
@@ -31,7 +34,7 @@ module Qubell
     # @return [Array<Qubell::Organization>] organizations info
     def organizations
       Qubell::APICall.get('/organizations').map do |org|
-        Qubell::Organization.new(org)
+        Qubell::Resources::Organization.new(org)
       end
     end
 

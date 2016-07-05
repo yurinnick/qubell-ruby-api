@@ -18,7 +18,7 @@ module Qubell
       end
     end
 
-    # @param [String] data
+    # @param [String] response
     def self.handle_response(response)
       if response.code == 200
         case response.headers[:content_type]
@@ -31,15 +31,15 @@ module Qubell
       end
     end
 
-    # @param [String] response
+    # @param [String] code
     def self.handle_error(code)
       case code
-      when 400 then raise Qubell::ExecutionError
-      when 401 then raise Qubell::AuthenticationError
-      when 403 then raise Qubell::PermissionsDeniedError
-      when 404 then raise Qubell::ResourceUnavaliable
-      when 409 then raise Qubell::WorkflowError
-      else raise Qubell::BaseError, code
+      when 400 then raise Qubell::Exceptions::ExecutionError
+      when 401 then raise Qubell::Exceptions::AuthenticationError
+      when 403 then raise Qubell::Exceptions::PermissionsDeniedError
+      when 404 then raise Qubell::Exceptions::ResourceUnavaliable
+      when 409 then raise Qubell::Exceptions::WorkflowError
+      else raise Qubell::Exceptions::BaseError, code
       end
     end
   end

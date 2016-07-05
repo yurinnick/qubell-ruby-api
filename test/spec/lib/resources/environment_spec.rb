@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 require 'yaml'
 
 module Qubell
-  describe Environment do
+  describe Resources::Environment do
     let(:config) { FactoryGirl.build :configuration }
     let(:env) { FactoryGirl.build :environment }
     let(:env_url) { "#{config.endpoint}/environments/#{env.id}" }
@@ -15,9 +15,7 @@ module Qubell
     let(:properties) do
       { properties: [{ name: 'test',
                        value: 'testvalue',
-                       type: 'string'
-                     }]
-      }
+                       type: 'string' }] }
     end
     # noinspection RubyStringKeysInHashInspection
     let(:markers) do
@@ -31,7 +29,8 @@ module Qubell
           .to_return(
             status: 200,
             body: policies.to_yaml,
-            headers: { :'Content-type' => 'application/x-yaml' })
+            headers: { :'Content-type' => 'application/x-yaml' }
+          )
       end
       it 'return array of policies' do
         expect(env.policies).to match_array(policies[:policies])
@@ -43,7 +42,8 @@ module Qubell
         stub_request(:put, env_url)
           .with(
             body: policies.to_yaml,
-            headers: { :'Content-type' => 'application/x-yaml' })
+            headers: { :'Content-type' => 'application/x-yaml' }
+          )
           .to_return do |request|
           stub_request(:get, env_url)
             .to_return(status: 200,
@@ -64,7 +64,8 @@ module Qubell
           .to_return(
             status: 200,
             body: properties.to_json,
-            headers: { :'Content-type' => 'application/json' })
+            headers: { :'Content-type' => 'application/json' }
+          )
       end
       it 'return array of properties' do
         expect(env.properties).to match_array(properties[:properties])
@@ -76,7 +77,8 @@ module Qubell
         stub_request(:put, "#{env_url}/properties")
           .with(
             body: properties.to_json,
-            headers: { :'Content-type' => 'application/json' })
+            headers: { :'Content-type' => 'application/json' }
+          )
           .to_return do |request|
           stub_request(:get, "#{env_url}/properties")
             .to_return(status: 200,
@@ -97,7 +99,8 @@ module Qubell
           .to_return(
             status: 200,
             body: markers.to_json,
-            headers: { :'Content-type' => 'application/json' })
+            headers: { :'Content-type' => 'application/json' }
+          )
       end
       it 'return array of markers' do
         expect(env.markers).to match_array(markers[:markers].map { |m| m[:name] })
@@ -109,7 +112,8 @@ module Qubell
         stub_request(:put, "#{env_url}/markers")
           .with(
             body: markers.to_json,
-            headers: { :'Content-type' => 'application/json' })
+            headers: { :'Content-type' => 'application/json' }
+          )
           .to_return do |request|
           stub_request(:get, "#{env_url}/markers")
             .to_return(status: 200,
@@ -127,10 +131,11 @@ module Qubell
     describe '#instances' do
       before do
         stub_request(:get, "#{env_url}/instances")
-        .to_return(
+          .to_return(
             status: 200,
             body: instances.to_json,
-            headers: { :'Content-type' => 'application/json' })
+            headers: { :'Content-type' => 'application/json' }
+          )
       end
       it 'return array of application instances' do
         expect(env.instances).to match_array(instances)

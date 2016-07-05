@@ -23,9 +23,7 @@ module Qubell
     # @param [HashMap<String => String>] key
     def initialize(options = {})
       options.each do |key|
-        Qubell.configuration do |c|
-          c.send("#{key}=", key)
-        end
+        Qubell.configuration.send("#{key[0]}=", key[1])
       end
     end
     # Get list of all organizations that current user belong to.

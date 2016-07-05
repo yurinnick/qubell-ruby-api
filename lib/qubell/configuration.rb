@@ -18,7 +18,7 @@ module Qubell
     attr_reader :endpoint
 
     def initialize
-      @domain = 'https://express.qubell.com'
+      @domain = 'https://express.tonomi.com'
       @api_version = '1'
     end
 
